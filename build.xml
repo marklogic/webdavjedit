@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+
+<!--
+     This is a build.xml file for building the ErrorList plugin.
+
+     The 'dist' target compiles the plugin and creates the JAR file.
+     Before running the 'dist' target, you will need to generate the
+     documentation using one of these two targets:
+
+     - 'docs-xalan': Creates documentation using the Xalan XSLT processor
+     - 'docs-xsltproc': Creates documentation using the xsltproc tool
+
+     To use it for building your own plugin, make these changes:
+
+     - Change definition of 'jar.name' to the name of your plugin's JAR file
+     - If necessary, add any dependencies to the 'project.class.path'
+       definition
+     - If necessary, change the list of files in the 'dist' targtet
+     - If necessary, change the 'docs-xalan' and 'docs-xsltproc' targets
+       accordingly.
+-->
+
+<project name="dav" default="dist" basedir=".">
+
+	<property name="jar.name"  value="DAV.jar"/>
+
+	<property name="src.dir" value="."/>
+	<property name="build.dir" value="build"/>
+	<property name="install.dir"  value="${build.dir}"/>
+	<property name="jedit.install.dir"  value="../.."/>
+	<property name="includes" value="../../.."/>
+	<property name="dir.includes" value="jakarta-slide-1.0.16/client/lib"/>
+
+	<path id="project.class.path">
+		<pathelement location="${src.dir}/lib/antlr.jar"/>
+		<pathelement location="${src.dir}/lib/commons-httpclient.jar"/>
+		<pathelement location="${src.dir}/lib/commons-logging.jar"/>
+		<pathelement location="${src.dir}/lib/crimson.jar"/>
+		<pathelement location="${src.dir}/lib/jaxp.jar"/>
+		<pathelement location="${src.dir}/lib/slide-anttasks.jar"/>
+		<pathelement location="${src.dir}/lib/slide-client.jar"/>
+		<pathelement location="${src.dir}/lib/slide-swing.jar"/>
+		<pathelement location="${src.dir}/lib/slide-webdavlib.jar"/>
+		<pathelement location="${src.dir}/lib/jedit.jar"/>
+	</path>
+
+	<target name="init">
+		<mkdir dir="${build.dir}"/>
+	</target>
+
+
+	<target name="compile" depends="init">
+		<javac
+			srcdir="${src.dir}"
+			destdir="${build.dir}"
+			deprecation="on"
+			includeJavaRuntime="yes"
+			classpathRef="project.class.path"
+		/>
+	</target>
+
+
+	<target name="dist" depends="compile">
+		<mkdir dir="${install.dir}"/>
+		<jar jarfile="${install.dir}/${jar.name}">
+			<fileset dir="${build.dir}"/>
+			<fileset dir="${src.dir}">
+				<include name="org/apache/commons/logging/*.class"/>
+				<include name="org/apache/commons/logging/impl/*.class"/>
+  				<include name="org/apache/commons/httpclient/*.class"/>
+				<include name="org/apache/commons/httpclient/auth/*.class"/>
+				<include name="org/apache/commons/httpclient/cookie/*.class"/>
+				<include name="org/apache/commons/httpclient/methods/*.class"/>
+				<include name="org/apache/commons/httpclient/methods/multipart/*.class"/>
+				<include name="org/apache/commons/httpclient/protocol/*.class"/>
+				<include name="org/apache/commons/httpclient/util/*.class"/>
+				<include name="org/apache/crimson/jaxp/*.class"/>
+				<include name="org/apache/crimson/parser/*.class"/>
+				<include name="org/apache/crimson/tree/*.class"/>
+				<include name="org/apache/crimson/util/*.class"/>
+				<include name="org/apache/webdav/lib/properties/*.class"/>
+				<include name="org/apache/webdav/lib/methods/*.class"/>
+				<include name="org/apache/webdav/lib/*.class"/>
+				<include name="org/apache/util/*.class"/>
+				<include name="actions.xml"/>
+				<include name="*.props"/>
+			</fileset>
+		</jar>
+	</target>
+</project>

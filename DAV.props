@@ -1,0 +1,40 @@
+# Plugin properties
+plugin.dav.DavPlugin.name=DAV
+plugin.dav.DavPlugin.author=James Glaubiger
+plugin.dav.DavPlugin.version=1.0.1
+#plugin.dav.DavPlugin.docs=index.html
+plugin.dav.DavPlugin.depend.0=jedit 04.00.03.00
+
+# Settings
+#vfs.ftp.passive=true
+#vfs.ftp.binary=true
+
+# Menu
+dav=open-dav save-dav - clear-working-directory specify-working-directory forget-remote-passwords lock-dav props-dav
+dav.label=DAV
+
+# Actions
+open-dav.label=Open from DAV Server...
+save-dav.label=Save to DAV Server...
+clear-working-directory.label=Clear Local Working Directory
+specify-working-directory.label=Specify Local Working Directory
+forget-remote-passwords.label=Forget Remote Passwords
+lock-dav.label=Unlock Current File
+props-dav.label=Edit Author(s) & Comments
+
+# DAV VFS label
+vfs.dav.label=Connect to a DAV Server...
+
+# Login dialog box
+login.title=Log in
+login.host=Remote host:
+login.user=User name:
+login.password=Password:
+
+# Props dialog box.
+props.title=Authoring & Comments
+props.author=Authors:
+props.authorEntry=Add Author(s):
+props.comment=Comments:
+props.commentEntry=Add Comments:
+
